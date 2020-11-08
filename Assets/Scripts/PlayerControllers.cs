@@ -33,16 +33,21 @@ public class PlayerControllers : MonoBehaviour {
             /// изменит своё направление применив на Vector3.forward ротацию объекта
             moveDirection = transform.TransformDirection(moveDirection);
 
+            //Таким образом все направления умножаются на скорость
             moveDirection *= speed;
             if (Input.GetButton("Jump"))///Проверка на нажатие кнопки прыжка
+            {
                 /// Тут выставляется высота Y вектора, не положение объекта
                 moveDirection.y = jumpValue;
+            }
 
         }
         /// Отнимаем гравитацию 
         //Debug.Log("moveDirection.y = " + moveDirection.y + " / gravity * Time.deltaTime = " + gravity * Time.deltaTime);
         moveDirection.y -= gravity * Time.deltaTime;
 
+        ///применение результатов
+        ///Этот метод начнёт передвижение объекта согласно ранее свормированному вектору
         controller.Move(moveDirection * Time.deltaTime);
     }
 
